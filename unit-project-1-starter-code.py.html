@@ -1,0 +1,125 @@
+
+# coding: utf-8
+
+# # SF-DAT-21 | Unit Project 1
+# In this first unit project you will create a framework to scope out data science projects.  This framework will provide you with a guide to develop a well-articulated problem statement and analysis plan that will be robust and reproducible.
+
+# ### Read and evaluate the following problem statement:
+# Determine which free-tier customers will covert to paying customers, using demographic data collected at signup (age, gender, location, and profession) and customer useage data (days since last log in, and `activity score 1 = active user`, `0 = inactive user`) based on Hooli data from January - April 2015.
+
+# #### 1. What is the outcome?
+
+# Answer: Paying customer indicator(y/n)
+
+# #### 2. What are the predictors/covariates?
+
+# Answer: Age, gender, location, profession, days since last login and activity score
+
+# #### 3. What timeframe is this data relevent for?
+
+# Answer: January - April 2015
+
+# #### 4. What is the hypothesis?
+
+# Answer: Demographic and customer usage data will allow us to predict if a free-tier customer will convert to paying customer.
+
+# ## Let's get started with our dataset
+
+# In[2]:
+
+import os
+import numpy as np
+import pandas as pd
+
+# If you checked-out the GitHub repository, the UCLA dataset is under ../../dataset/admissions.csv (relative to this file)
+path = os.path.join('..', '..', 'dataset', 'admissions.csv')
+
+"""""
+# Alternative: Get the dataset directly online...
+path = 'http://github.com/ga-students/sf-dat-21/raw/master/unit-projects/dataset/admissions.csv'
+"""""
+
+df = pd.read_csv(path)
+
+df.head()
+
+
+# #### 1. Create a data dictionary.
+
+# Answer: 
+# 
+# Variable | Description | Type of Variable
+# ---|---|---
+# Admit | 0 = not admit, 1 = admit | Categorical
+# GRE | integer | Continuous
+# GPA | integer | Continuous
+# Prestige | 1.0- lowest, 2.0, 3.0, 4.0- highest| Categorical
+
+# We would like to explore the association between X and Y.
+
+# #### 2. What is the outcome?
+
+# Answer: admit/not admit
+3. What are the predictors/covariates?
+# Answer: prestige, gre, gpa
+
+# #### 4. What timeframe is this data relevent for?
+
+# Answer: For the semester
+
+# #### 4. What is the hypothesis?
+
+# Answer: Prestige, GRE and GPA score effect admissions.
+
+# ## Problem Statement
+
+# Using the above information, write a well-formed problem statement.
+
+# Answer: How variables, GRE, GPA and prestige of the undergraduate institution, effect admission into graduate school.
+
+# ### Exploratory Analysis Plan
+
+# Using the lab from a class as a guide, create an exploratory analysis plan.
+
+# #### 1. What are the goals of the exploratory analysis?
+
+# Answer: 
+# maximize insight into a data set;
+# uncover underlying structure;
+# extract important variables;
+# detect outliers and anomalies;
+# test underlying assumptions;
+# develop parsimonious models; and
+# determine optimal factor settings.
+
+# #### 2a. What are the assumptions of the distribution of data?
+
+# Answer: Independence of cases, Normality, Equality
+2b. How will determine the distribution of your data?
+# Answer: With a p-value test
+
+# #### 3a. How might outliers impact your analysis?
+
+# Answer:  "Unusually" large or small values that are dramatically separated from the rest of the data might be: 'out-of-range' or physically impossible values that resulted from entry or processing error. 
+
+# #### 3b. How will you test for outliers?
+
+# Answer: IQR, where IQR, the ‘Inter Quartile Range’ is the difference between 75th and 25th quartiles. It could be find at the points outside the whiskers in below box plot.
+
+# 4a. What is colinearity?
+
+# Answer: In statistics, collinearityis a phenomenon in which two or more predictor variables in a multiple regression model are highly correlated, meaning that one can be linearly predicted from the others with a substantial degree of accuracy.
+
+# #### 4b. How will you test for colinearity?
+
+# Answer:   Pearson correlation coefficient and  chi-square test.
+
+# #### 5. What is your exploratory analysis plan?
+# Using the above information, write an exploratory analysis plan that would allow you or a colleague to reproduce your analysis 1 year from now.
+
+# Answer: Exploratory Analysis - Determine the Distribution - Test for Outliers - Test for Colinearity
+
+# ## Bonus Questions:
+# 1. Outline your analysis method for predicting your outcome.
+# 2. Write an alternative problem statement for your dataset.
+# 3. Articulate the assumptions and risks of the alternative model.
